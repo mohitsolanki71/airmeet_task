@@ -1,22 +1,41 @@
 import "./home.css";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDataError, getDataLoading, getDataSuccess } from "../store/action";
 
 export const Home = () => {
   const [data, setData] = useState([]);
 
   const [isChecked, setIsChecked] = useState(false);
 
+  const { loading, users, error } = useSelector((state) => ({
+    loading: state.loading,
+    users: state.users,
+    error: state.error,
+  }));
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getData();
   }, []);
 
-  const getData = async () => {
-    let res = await fetch("https://airmeetback.herokuapp.com/user");
-    let data = await res.json();
+  // getting all data
 
-    setData(data);
-    console.log("data", data.length);
-    setIsChecked(new Array(data.length).fill(false));
+  const getData = async () => {
+    try {
+      dispatch(getDataLoading());
+      let res = await fetch("https://airmeetback.herokuapp.com/user");
+      let data = await res.json();
+
+      setData(data);
+      dispatch(getDataSuccess(data));
+      console.log("users", users);
+      setIsChecked(new Array(data.length).fill(false));
+    } catch (err) {
+      dispatch(getDataError(err));
+      console.log(err);
+    }
   };
 
   const handleCheck = (position) => {
@@ -28,6 +47,8 @@ export const Home = () => {
 
     console.log("check", isChecked[position]);
   };
+
+  // function to delete data of a selected user
 
   const handleDelete = (id) => {
     try {
@@ -58,14 +79,18 @@ export const Home = () => {
     }
   };
 
-  return (
+  return loading ? (
+    <div className="loading_or_error">loading....</div>
+  ) : error ? (
+    <div className="loading_or_error">something went wrong</div>
+  ) : (
     <div id="table-container">
       <table>
         <tr>
           <th>CheckBox</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Delete</th>
+          <th>Select to Delete</th>
           <th>Favorites</th>
         </tr>
         {data.map((e, i) => (
@@ -82,7 +107,11 @@ export const Home = () => {
             <td>{e.first_name}</td>
             <td>{e.last_name}</td>
             <td>
-              <button onClick={() => handleDelete(e._id)}>Delete</button>
+              {isChecked[i] ? (
+                <button onClick={() => handleDelete(e._id)}>Delete</button>
+              ) : (
+                <div></div>
+              )}
             </td>
             <td>
               <button onClick={() => handleFavourite(e)}>

@@ -5,7 +5,7 @@ export const Navbar = () => {
   return (
     <div id="navbar">
       <div id="navbar_icon">
-        <img src="https://www.seekpng.com/png/detail/372-3729023_open-google-music-icon-png.png"></img>
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732222.png"></img>
         <Link className="link" to={"/"}>
           <h1 id="name">𝓐𝓭𝓶𝓲𝓷</h1>
         </Link>

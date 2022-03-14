@@ -16,16 +16,20 @@ export const Favorites = () => {
   return (
     <div>
       {data.length > 0 ? (
-        <div id="playlist_data_div">
+        <div id="user_data_div">
           {data.map((e, i) => (
-            <div className="playlist_song_detail">
-              <p className="playlist_song_name">{e.first_name}</p>
-              <p className="playlist_song_artist"> {e.last_name}</p>
+            <div className="fav_user_detail">
+              <p className="user_name">
+                <b>First Name: </b> {e.first_name}
+              </p>
+              <p className="user_last_name">
+                <b>Last Name: </b> {e.last_name}
+              </p>
             </div>
           ))}
         </div>
       ) : (
-        <div id="empty_playlist">
+        <div id="empty_fav">
           <img src="https://cdn.dribbble.com/users/1554526/screenshots/3399669/media/51c98501bc68499ed0220e1ba286eeaf.png?compress=1&resize=400x300"></img>
         </div>
       )}

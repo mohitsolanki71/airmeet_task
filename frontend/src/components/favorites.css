@@ -1,24 +1,22 @@
-#empty_playlist {
+#empty_fav {
   margin: 50px auto;
   padding: 50px;
   backdrop-filter: blur(7px);
   border: 1px solid gray;
   border-radius: 20px;
 }
-#empty_playlist img {
+#empty_fav img {
   border-radius: 20px;
 }
 
 /* //////// */
 
-#playlist_data_div {
-  width: 70%;
+#user_data_div {
+  width: 50%;
   transition: 0.5s;
-  border-left: 7px solid #dadbdd;
-  margin-left: 10px;
-  padding-left: 15px;
+  margin: auto;
 }
-.playlist_song_detail {
+.fav_user_detail {
   border-bottom: 3px solid rgb(221, 221, 221);
   backdrop-filter: blur(7px);
   padding: 1%;
@@ -29,13 +27,13 @@
   align-items: center;
   transition: 0.8s;
 }
-.playlist_song_detail:hover {
+.fav_user:hover {
   background-color: #b9c3cc7a;
 }
 
-.playlist_song_name {
+.user_name {
   width: 25%;
 }
-.playlist_song_artist {
+.user_last_name {
   width: 30%;
 }

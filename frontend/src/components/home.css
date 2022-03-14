@@ -7,7 +7,14 @@
 #table-container {
   margin: 10px 30%;
 }
-th,
-td {
-  border-color: #96d4d4;
+
+.loading_or_error {
+  font-size: 50px;
+  max-width: 40%;
+  font-weight: bold;
+  color: #395b64;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  margin: auto;
+  margin-top: 100px;
 }
