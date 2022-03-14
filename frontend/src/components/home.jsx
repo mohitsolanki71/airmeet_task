@@ -30,7 +30,7 @@ export const Home = () => {
 
       setData(data);
       dispatch(getDataSuccess(data));
-      console.log("users", users);
+      console.log("data", data.length);
       setIsChecked(new Array(data.length).fill(false));
     } catch (err) {
       dispatch(getDataError(err));
@@ -63,6 +63,7 @@ export const Home = () => {
     }
   };
 
+  // adding fav user to the local storage
   if (localStorage.getItem("user_data") === null) {
     localStorage.setItem("user_data", JSON.stringify([]));
   }
@@ -93,7 +94,7 @@ export const Home = () => {
           <th>Select to Delete</th>
           <th>Favorites</th>
         </tr>
-        {data.map((e, i) => (
+        {users.map((e, i) => (
           <tr key={i} className={isChecked[i] ? "red" : "white"}>
             <td>
               <input
