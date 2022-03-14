@@ -10,20 +10,28 @@ export const Home = () => {
     getData();
   }, []);
 
-  const getData = () => {
-    try {
-      fetch("http://localhost:5000/user")
-        .then((d) => d.json())
-        .then((res) => {
-          setData(res);
-          console.log("res", res);
-        })
-        .then(() => {
-          setIsChecked(new Array(data.length).fill(false));
-        });
-    } catch (err) {
-      console.log(err);
-    }
+  const getData = async () => {
+    // try {
+    //   fetch("http://localhost:5000/user")
+    //     .then((d) => d.json())
+    //     .then((res) => {
+    //       setData(res);
+    //       console.log("res", res);
+    //     })
+    //     .then(() => {
+    //       console.log("data_length", data.length);
+    //       setIsChecked(new Array(data.length).fill(false));
+    //     });
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    let res = await fetch("http://localhost:5000/user");
+    let data = await res.json();
+
+    setData(data);
+    console.log("data", data.length);
+    setIsChecked(new Array(data.length).fill(false));
   };
 
   const handleCheck = (position) => {
@@ -36,14 +44,35 @@ export const Home = () => {
     console.log("check", isChecked[position]);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     try {
-    } catch (err) {}
+      fetch(`http://localhost:5000/user/${id}`, {
+        method: "DELETE",
+      }).then((response) => {
+        console.log(response);
+        getData();
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleFavourite = () => {
-    console.log("favourites");
+  if (localStorage.getItem("user_data") === null) {
+    localStorage.setItem("user_data", JSON.stringify([]));
+  }
+
+  const handleFavourite = (user) => {
+    let user_data = JSON.parse(localStorage.getItem("user_data"));
+    console.log("user", user);
+    if (user_data.filter((e) => e.first_name === user.first_name).length > 0) {
+      alert("user is already present in fav");
+    } else {
+      user_data.push(user);
+      localStorage.setItem("user_data", JSON.stringify(user_data));
+      alert("user is successfully added to fav");
+    }
   };
+
   return (
     <div id="table-container">
       <table>
@@ -65,13 +94,15 @@ export const Home = () => {
                 onChange={() => handleCheck(i)}
               ></input>
             </td>
-            <td>{e.company}</td>
-            <td>{e.description}</td>
+            <td>{e.first_name}</td>
+            <td>{e.last_name}</td>
             <td>
-              <button onClick={handleDelete}>Delete</button>
+              <button onClick={() => handleDelete(e._id)}>Delete</button>
             </td>
             <td>
-              <button onClick={handleFavourite}>Add to favorites</button>
+              <button onClick={() => handleFavourite(e)}>
+                Add to favorites
+              </button>
             </td>
           </tr>
         ))}

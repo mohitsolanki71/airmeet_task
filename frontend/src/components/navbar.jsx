@@ -11,7 +11,7 @@ export const Navbar = () => {
         </Link>
       </div>
       <div>
-        <Link className="right_icons" to={"/playlist"}>
+        <Link className="right_icons" to={"/favorites"}>
           𝐹𝒶𝓋𝑜𝓇𝒾𝓉𝑒
         </Link>
       </div>
