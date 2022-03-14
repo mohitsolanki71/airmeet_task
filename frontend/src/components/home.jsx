@@ -11,21 +11,6 @@ export const Home = () => {
   }, []);
 
   const getData = async () => {
-    // try {
-    //   fetch("http://localhost:5000/user")
-    //     .then((d) => d.json())
-    //     .then((res) => {
-    //       setData(res);
-    //       console.log("res", res);
-    //     })
-    //     .then(() => {
-    //       console.log("data_length", data.length);
-    //       setIsChecked(new Array(data.length).fill(false));
-    //     });
-    // } catch (err) {
-    //   console.log(err);
-    // }
-
     let res = await fetch("http://localhost:5000/user");
     let data = await res.json();
 
