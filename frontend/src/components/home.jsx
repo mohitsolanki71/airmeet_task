@@ -11,7 +11,7 @@ export const Home = () => {
   }, []);
 
   const getData = async () => {
-    let res = await fetch("http://localhost:5000/user");
+    let res = await fetch("https://airmeetback.herokuapp.com/user");
     let data = await res.json();
 
     setData(data);
@@ -31,7 +31,7 @@ export const Home = () => {
 
   const handleDelete = (id) => {
     try {
-      fetch(`http://localhost:5000/user/${id}`, {
+      fetch(`https://airmeetback.herokuapp.com/user/${id}`, {
         method: "DELETE",
       }).then((response) => {
         console.log(response);

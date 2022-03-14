@@ -7,8 +7,7 @@
 #table-container {
   margin: 10px 30%;
 }
-table,
 th,
 td {
-  border: 1px solid black;
+  border-color: #96d4d4;
 }
