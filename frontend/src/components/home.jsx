@@ -12,7 +12,7 @@ export const Home = () => {
 
   const getData = () => {
     try {
-      fetch("https://guarded-river-02224.herokuapp.com/product")
+      fetch("http://localhost:5000/user")
         .then((d) => d.json())
         .then((res) => {
           setData(res);
@@ -36,12 +36,23 @@ export const Home = () => {
     console.log("check", isChecked[position]);
   };
 
+  const handleDelete = () => {
+    try {
+    } catch (err) {}
+  };
+
+  const handleFavourite = () => {
+    console.log("favourites");
+  };
   return (
     <div id="table-container">
       <table>
         <tr>
-          <th>Title</th>
-          <th>description</th>
+          <th>CheckBox</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Delete</th>
+          <th>Favorites</th>
         </tr>
         {data.map((e, i) => (
           <tr key={i} className={isChecked[i] ? "red" : "white"}>
@@ -56,6 +67,12 @@ export const Home = () => {
             </td>
             <td>{e.company}</td>
             <td>{e.description}</td>
+            <td>
+              <button onClick={handleDelete}>Delete</button>
+            </td>
+            <td>
+              <button onClick={handleFavourite}>Add to favorites</button>
+            </td>
           </tr>
         ))}
       </table>
